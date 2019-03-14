@@ -47,7 +47,7 @@ for tag in soup.find("table").find_all(["small", "td"]):
         except:
           None
 
-print("Subject,Start Date,All Day Event,Start Time,End Time,Location,Description")
+print("Subject,Start Date,Start Time,End Date,End Time,All Day Event,Description,Location,Private")
 for key in terms:
   if any(x in key for x in sys.argv[3:]):
     for term in terms[key]:
@@ -64,5 +64,7 @@ for key in terms:
       else:
         year = sys.argv[1][4:]
 
-      print("\"%s\",%s/%s/%s,FALSE,%d:00,%d:50,," % 
-        (name, term.month, term.day, year, 7 + int(term.off), 6+int(term.off)+int(term.time)))
+      print("\"%s\",%s/%s/%s,%d:00,%s/%s/%s,%d:50,FALSE,,,TRUE" % 
+        (name, 
+        term.month, term.day, year, 7 + int(term.off), 
+        term.month, term.day, year, 6 + int(term.off) + int(term.time)))
